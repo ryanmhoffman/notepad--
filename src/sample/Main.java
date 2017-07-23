@@ -23,7 +23,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 		BorderPane root = new BorderPane();
         primaryStage.setTitle("Notepad--");
-		primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("icon.png")));
+		primaryStage.getIcons()
+                .add(new Image(Main.class.getResourceAsStream("icon.png")));
 
         Scene scene = new Scene(root, 675, 500);
 
@@ -40,7 +41,8 @@ public class Main extends Application {
 		// File menu
 		Menu file = new Menu("File");
 		MenuItem newItem = new MenuItem("New");
-		newItem.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.SHORTCUT_DOWN));
+		newItem.setAccelerator(new KeyCodeCombination(KeyCode.N, 
+                                KeyCombination.SHORTCUT_DOWN));
 		newItem.setOnAction(actionEvent -> {
 			try {
 				runAnotherApp(Main.class);
@@ -49,10 +51,12 @@ public class Main extends Application {
 			}
 		});
 		MenuItem openItem = new MenuItem("Open");
-		openItem.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.SHORTCUT_DOWN));
+		openItem.setAccelerator(new KeyCodeCombination(KeyCode.O, 
+                                KeyCombination.SHORTCUT_DOWN));
 		openItem.setOnAction(actionEvent -> openFile(primaryStage));
 		MenuItem saveItem = new MenuItem("Save");
-		saveItem.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN));
+		saveItem.setAccelerator(new KeyCodeCombination(KeyCode.S, 
+                                KeyCombination.SHORTCUT_DOWN));
 		saveItem.setOnAction(actionEvent -> {
 			if(filePath != null){
 				saveFile(textArea.getText(), filePath);
@@ -61,7 +65,8 @@ public class Main extends Application {
 		MenuItem saveAsItem = new MenuItem("Save As");
 		saveAsItem.setOnAction(actionEvent -> saveAs(primaryStage));
 		MenuItem exitItem = new MenuItem("Exit");
-		exitItem.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.SHORTCUT_DOWN));
+		exitItem.setAccelerator(new KeyCodeCombination(KeyCode.Q, 
+                                KeyCombination.SHORTCUT_DOWN));
 		exitItem.setOnAction(actionEvent -> Platform.exit());
 		file.getItems().addAll(newItem, openItem, saveItem, saveAsItem, exitItem);
 		// About menu
@@ -85,8 +90,10 @@ public class Main extends Application {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("About Notepad--");
 		alert.setHeaderText("Notepad--");
-		alert.setContentText("Notepad-- is a cross-platform (near) clone of the Windows only program Notepad. " +
-		"It was developed mainly so I could have the most basic text editor ever on my Mac and Linux machines.");
+		alert.setContentText("Notepad-- is a cross-platform (near) clone of " + 
+                        "the Windows only program Notepad. " +
+		                "It was developed mainly so I could have the most " + 
+                        "basic text editor ever on my Mac and Linux machines.");
 		alert.showAndWait();
 	}
 
@@ -108,7 +115,8 @@ public class Main extends Application {
 		}
 	}
 
-	private void runAnotherApp(Class<? extends Application> anotherAppClass) throws Exception {
+	private void runAnotherApp(Class<? extends Application> anotherAppClass) 
+                    throws Exception {
 		Application newApp = anotherAppClass.newInstance();
 		Stage newStage = new Stage();
 		newApp.start(newStage);
