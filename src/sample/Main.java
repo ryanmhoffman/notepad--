@@ -97,6 +97,8 @@ public class Main extends Application {
 		alert.showAndWait();
 	}
 
+    // Save a new, previously unsaved file.
+    // The user is required to provide a file name, extension, and path.
 	private void saveAs(Stage stage){
 		FileChooser fileChooser = new FileChooser();
 		filePath = fileChooser.showSaveDialog(stage);
@@ -106,6 +108,7 @@ public class Main extends Application {
 		}
 	}
 
+    // Open a file explorer (Finder on Mac) to select a file to open. 
 	private void openFile(Stage stage){
 		FileChooser fileChooser = new FileChooser();
 		filePath = fileChooser.showOpenDialog(stage);
@@ -115,6 +118,10 @@ public class Main extends Application {
 		}
 	}
 
+    // Open another instance of Notepad--. 
+    // This is tied to the current instance, so if one is closed,
+    // they both get closed. I plan to fix this in the future so
+    // they will be separate instances.
 	private void runAnotherApp(Class<? extends Application> anotherAppClass) 
                     throws Exception {
 		Application newApp = anotherAppClass.newInstance();
@@ -122,6 +129,9 @@ public class Main extends Application {
 		newApp.start(newStage);
 	}
 
+    // Save the current file.
+    // Only works if it has been previously saved, for example, saving
+    // changes.
 	private void saveFile(String content, File file){
 		try {
 			FileWriter fileWriter;
@@ -133,6 +143,8 @@ public class Main extends Application {
 		}
 	}
 
+    // Read the contents of a file into the editor pane so the user
+    // can modify them as plain text. 
 	private String readFile(File file){
 		StringBuilder stringBuffer = new StringBuilder();
 		BufferedReader bufferedReader = null;
