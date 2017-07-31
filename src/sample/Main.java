@@ -19,6 +19,7 @@ public class Main extends Application {
 	private File filePath = null;
 	private TextArea textArea;
 
+    // TODO: Refactor this into smaller methods.
     @Override
     public void start(Stage primaryStage) throws Exception{
 		BorderPane root = new BorderPane();
@@ -38,7 +39,20 @@ public class Main extends Application {
 		textArea.setWrapText(true);
 		root.setCenter(textArea);
 
-		// File menu
+		// About menu
+		Menu about = new Menu("About");
+		MenuItem aboutItem = new MenuItem("About Notepad--");
+		aboutItem.setOnAction(actionEvent -> about());
+		about.getItems().addAll(aboutItem);
+
+		menuBar.getMenus().addAll(createFileMenu(primaryStage), about);
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    private Menu createFileMenu(Stage primaryStage){
+        // File menu
 		Menu file = new Menu("File");
 		MenuItem newItem = new MenuItem("New");
 		newItem.setAccelerator(new KeyCodeCombination(KeyCode.N, 
@@ -50,7 +64,8 @@ public class Main extends Application {
 				e.printStackTrace();
 			}
 		});
-		MenuItem openItem = new MenuItem("Open");
+        // Create the menu item to open a new file.
+        MenuItem openItem = new MenuItem("Open");
 		openItem.setAccelerator(new KeyCodeCombination(KeyCode.O, 
                                 KeyCombination.SHORTCUT_DOWN));
 		openItem.setOnAction(actionEvent -> openFile(primaryStage));
@@ -62,6 +77,7 @@ public class Main extends Application {
 				saveFile(textArea.getText(), filePath);
 			}
 		});
+        // Create the menu item to save a currently unsaved file.
 		MenuItem saveAsItem = new MenuItem("Save As");
 		saveAsItem.setOnAction(actionEvent -> saveAs(primaryStage));
 		MenuItem exitItem = new MenuItem("Exit");
@@ -69,18 +85,9 @@ public class Main extends Application {
                                 KeyCombination.SHORTCUT_DOWN));
 		exitItem.setOnAction(actionEvent -> Platform.exit());
 		file.getItems().addAll(newItem, openItem, saveItem, saveAsItem, exitItem);
-		// About menu
-		Menu about = new Menu("About");
-		MenuItem aboutItem = new MenuItem("About Notepad--");
-		aboutItem.setOnAction(actionEvent -> about());
-		about.getItems().addAll(aboutItem);
 
-		menuBar.getMenus().addAll(file, about);
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        return file;
     }
-
 
     public static void main(String[] args) {
         launch(args);
