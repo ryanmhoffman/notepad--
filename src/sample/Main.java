@@ -29,15 +29,12 @@ public class Main extends Application {
 
         Scene scene = new Scene(root, 675, 500);
 
+        // The menu bar where dropdown menus and options will be added.
 		MenuBar menuBar = new MenuBar();
 		menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
 		root.setTop(menuBar);
 
-		textArea = new TextArea();
-		textArea.prefWidthProperty().bind(primaryStage.widthProperty());
-		textArea.prefHeightProperty().bind(primaryStage.heightProperty());
-		textArea.setWrapText(true);
-		root.setCenter(textArea);
+		root.setCenter(createTextArea(primaryStage));
 
 		// About menu
 		Menu about = new Menu("About");
@@ -51,6 +48,14 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    private TextArea createTextArea(Stage primaryStage){
+        // Create the text area for input and typing.
+        textArea = new TextArea();
+        textArea.prefWidthProperty().bind(primaryStage.widthProperty());
+        textArea.prefHeightProperty().bind(primaryStage.heightProperty());
+        textArea.setWrapText(true);
+        return textArea
+    }
     private Menu createFileMenu(Stage primaryStage){
         // File menu
 		Menu file = new Menu("File");
@@ -173,5 +178,4 @@ public class Main extends Application {
 		}
 		return stringBuffer.toString();
 	}
-
 }
